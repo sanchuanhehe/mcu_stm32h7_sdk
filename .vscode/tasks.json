@@ -1,0 +1,60 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "CMake Configure",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-DCMAKE_BUILD_TYPE=Debug",
+                "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/cmake/gcc-arm-none-eabi.cmake",
+                "-S${workspaceFolder}",
+                "-B${workspaceFolder}/build/Debug",
+                "-GNinja"
+            ],
+            "problemMatcher": "$gcc"
+        },
+        {
+            "label": "CMake Build",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "${workspaceFolder}/build/Debug",
+                "--",
+                "-j8"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "dependsOn": ["CMake Configure"],
+            "problemMatcher": "$gcc"
+        },
+        {
+            "label": "JLink Connect",
+            "type": "shell",
+            "command": "JLinkExe",
+            "args": [
+                "-device",
+                "STM32H743XI",
+                "-if",
+                "SWD",
+                "-speed",
+                "4000",
+                "-autoconnect",
+                "1"
+            ]
+        },
+        {
+            "label": "Clean Project",
+            "type": "shell",
+            "command": "git",
+            "args": [
+                "clean",
+                "-fdX"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}

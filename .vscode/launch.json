@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Cortex Debug",
+            "cwd": "${workspaceFolder}",
+            "executable": "./bin/executable.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "runToEntryPoint": "main",
+            "servertype": "jlink",
+            "device": "STM32H743XI",  // 添加芯片型号
+            "interface": "swd",        // 设置调试接口为 SWD
+            "svdFile": "${workspaceFolder}/STM32H743.svd"  // 添加 SVD 文件路径（可选）
+        }
+    ]
+}
