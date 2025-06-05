@@ -1,5 +1,5 @@
 {
-  "name": "ws63devcon",
+  "name": "STM32H743 Dev Container",
   "context": "..",
   "dockerFile": "Dockerfile",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
