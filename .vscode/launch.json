@@ -41,9 +41,10 @@
             "type": "cortex-debug",
             "runToEntryPoint": "main",
             "servertype": "external",
-            "gdbTarget": "host.docker.internal:3333",
+            "gdbTarget": "localhost:3333",
             "gdbPath": "gdb-multiarch",
             "objdumpPath": "arm-none-eabi-objdump",
+            "preLaunchTask": "CMake Build",
             "showDevDebugOutput": "none"
         }
     ]
