@@ -21,10 +21,11 @@ RUN dnf update -y && dnf install -y --skip-unavailable\
   arm-none-eabi-gcc-cs \
   arm-none-eabi-gcc-cs-c++ \
   gdb \
-  clang-tools-extra \
-  awk \
+  gdb-multiarch \
   binutils-multiarch \
-  binutils-arm-none-eabi
+  binutils-arm-none-eabi \
+  clang-tools-extra \
+  awk
 
 # 安装 Python 依赖
 RUN pip3 install "pycparser>=2.21" pyyaml "kconfiglib>=14.1.0"

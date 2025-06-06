@@ -59,10 +59,10 @@
         {
             "label": "Start JLinkGDBServer on Host",
             "type": "shell",
-            "command": "ssh",
+            "command": "bash",
             "args": [
-                "host.docker.internal",
-                "JLinkGDBServer -device STM32H743XI -if SWD -port 2331 -nosilent -nolocalhostonly &"
+                "-c",
+                "ssh $USER@host.docker.internal 'JLinkGDBServer -device STM32H743XI -if SWD -port 2331 -nosilent -nolocalhostonly'"
             ],
             "group": "build",
             "presentation": {
@@ -72,15 +72,15 @@
                 "panel": "shared"
             },
             "problemMatcher": [],
-            "detail": "在宿主机上启动JLinkGDBServer进行远程调试"
+            "detail": "在宿主机上启动JLinkGDBServer进行远程调试，先清理已存在的进程"
         },
         {
             "label": "Stop JLinkGDBServer on Host",
             "type": "shell",
-            "command": "ssh",
+            "command": "bash",
             "args": [
-                "host.docker.internal",
-                "pkill -f JLinkGDBServer"
+                "-c",
+                "ssh $USER@host.docker.internal 'pkill -f JLinkGDBServer'"
             ],
             "group": "build",
             "presentation": {
