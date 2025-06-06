@@ -15,6 +15,7 @@
             "objdumpPath": "arm-none-eabi-objdump",
             "preLaunchTask": "CMake Build",
             "postDebugTask": "Clean Project",
+            "showDevDebugOutput": "none"
         },
         {
             "name": "Cortex Debug Remote (Host JLinkGDBServer)",
@@ -28,7 +29,8 @@
             "gdbPath": "gdb-multiarch",
             "objdumpPath": "arm-none-eabi-objdump",
             "preLaunchTask": "Start JLinkGDBServer on Host",
-            "postDebugTask": "Stop JLinkGDBServer on Host"
+            "postDebugTask": "Stop JLinkGDBServer on Host",
+            "showDevDebugOutput": "none"
         }
     ]
 }
