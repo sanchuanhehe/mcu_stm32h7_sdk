@@ -3,10 +3,33 @@
   "context": "..",
   "dockerFile": "Dockerfile",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-  "remoteUser": "vscode",
+  
+  // 使用宿主机用户名
+  "remoteUser": "${localEnv:USER}",
+  
+  // 构建参数，传递宿主机用户信息
+  "build": {
+    "args": {
+      "USERNAME": "${localEnv:USER}",
+      "USER_UID": "1000",
+      "USER_GID": "1000"
+    }
+  },
+  
+  // 远程调试配置说明:
+  // --add-host=host.docker.internal:host-gateway 允许容器访问宿主机服务
+  // 
+  // 使用远程调试时，需要在宿主机上启动JLinkGDBServer:
+  // JLinkGDBServer -device STM32H743XI -if SWD -port 2331 -nosilent -nolocalhostonly
+  // 
+  // 然后在VS Code中选择"Cortex Debug Remote (Host JLinkGDBServer)"配置进行调试
   "runArgs": [
     "--add-host=host.docker.internal:host-gateway"
   ],
+  
+  // 设置初始化命令，获取真实的UID和GID
+  "initializeCommand": "bash -c 'echo \"Host UID: $(id -u), GID: $(id -g), User: $USER\"'",
+  
   "customizations": {
     "vscode": {
       "extensions": [

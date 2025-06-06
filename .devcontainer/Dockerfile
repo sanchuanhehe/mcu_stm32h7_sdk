@@ -1,7 +1,7 @@
 FROM fedora:43
 
 # 安装必要的工具和依赖
-RUN dnf update -y && dnf install -y \
+RUN dnf update -y && dnf install -y --skip-unavailable\
   cmake \
   python3 \
   python3-pip \
@@ -22,7 +22,9 @@ RUN dnf update -y && dnf install -y \
   arm-none-eabi-gcc-cs-c++ \
   gdb \
   clang-tools-extra \
-  awk
+  awk \
+  binutils-multiarch \
+  binutils-arm-none-eabi
 
 # 安装 Python 依赖
 RUN pip3 install "pycparser>=2.21" pyyaml "kconfiglib>=14.1.0"
@@ -33,9 +35,16 @@ ENV LC_ALL=C.UTF-8
 # 设置passwordless sudo
 RUN echo "ALL ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-# 创建vscode用户
-RUN useradd -m -s /bin/bash -u 1000 vscode && \
-  echo "vscode ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
-  usermod -aG wheel vscode
+# 接受构建参数
+ARG USERNAME=developer
+ARG USER_UID=1000
+ARG USER_GID=1000
 
-USER vscode
+# 创建组和用户
+RUN groupadd --gid $USER_GID $USERNAME \
+  && useradd --uid $USER_UID --gid $USER_GID -m -s /bin/bash $USERNAME \
+  && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
+  && chmod 0440 /etc/sudoers.d/$USERNAME
+
+# 使用简单的CMD
+CMD ["/bin/bash"]

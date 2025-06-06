@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Cortex Debug",
+            "name": "Cortex Debug for Local Linux",
             "cwd": "${workspaceFolder}",
             "executable": "./build/Debug/H7cpu.elf",
             "request": "launch",
@@ -11,8 +11,20 @@
             "servertype": "jlink",
             "device": "STM32H743XI",
             "interface": "swd",
-            "gdbPath": "gdb-multiarch",  // 添加这一行
-            "svdFile": "${workspaceFolder}/STM32H743.svd"
+            "gdbPath": "gdb-multiarch"
+        },
+        {
+            "name": "Cortex Debug Remote (Host JLinkGDBServer)",
+            "cwd": "${workspaceFolder}",
+            "executable": "./build/Debug/H7cpu.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "runToEntryPoint": "main",
+            "servertype": "external",
+            "gdbTarget": "host.docker.internal:2331",
+            "gdbPath": "gdb-multiarch",
+            "preLaunchTask": "Start JLinkGDBServer on Host",
+            "postDebugTask": "Stop JLinkGDBServer on Host"
         }
     ]
 }
