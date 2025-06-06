@@ -11,7 +11,10 @@
             "servertype": "jlink",
             "device": "STM32H743XI",
             "interface": "swd",
-            "gdbPath": "gdb-multiarch"
+            "gdbPath": "gdb-multiarch",
+            "objdumpPath": "arm-none-eabi-objdump",
+            "preLaunchTask": "CMake Build",
+            "postDebugTask": "Clean Project",
         },
         {
             "name": "Cortex Debug Remote (Host JLinkGDBServer)",
@@ -21,8 +24,9 @@
             "type": "cortex-debug",
             "runToEntryPoint": "main",
             "servertype": "external",
-            "gdbTarget": "host.docker.internal:2331",
+            "gdbTarget": "host.docker.internal:3333",
             "gdbPath": "gdb-multiarch",
+            "objdumpPath": "arm-none-eabi-objdump",
             "preLaunchTask": "Start JLinkGDBServer on Host",
             "postDebugTask": "Stop JLinkGDBServer on Host"
         }

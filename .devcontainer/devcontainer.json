@@ -20,7 +20,7 @@
   // --add-host=host.docker.internal:host-gateway 允许容器访问宿主机服务
   // 
   // 使用远程调试时，需要在宿主机上启动JLinkGDBServer:
-  // JLinkGDBServer -device STM32H743XI -if SWD -port 2331 -nosilent -nolocalhostonly
+  // JLinkGDBServer -device STM32H743XI -if SWD -port 3333 -nosilent -nolocalhostonly
   // 
   // 然后在VS Code中选择"Cortex Debug Remote (Host JLinkGDBServer)"配置进行调试
   "runArgs": [
@@ -54,7 +54,8 @@
         "marus25.cortex-debug",
         "usernamehw.errorlens",
         "eamodio.gitlens",
-        "mcu-debug.debug-tracker-vscode"
+        "mcu-debug.debug-tracker-vscode",
+        "mcu-debug.peripheral-viewer"
       ]
     }
   }

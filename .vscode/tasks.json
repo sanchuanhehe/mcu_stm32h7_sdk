@@ -28,7 +28,9 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "dependsOn": ["CMake Configure"],
+            "dependsOn": [
+                "CMake Configure"
+            ],
             "problemMatcher": "$gcc"
         },
         {
@@ -59,10 +61,10 @@
         {
             "label": "Start JLinkGDBServer on Host",
             "type": "shell",
-            "command": "bash",
+            "command": "ssh",
             "args": [
-                "-c",
-                "ssh $USER@host.docker.internal 'JLinkGDBServer -device STM32H743XI -if SWD -port 2331 -nosilent -nolocalhostonly'"
+                "host.docker.internal",
+                "nohup JLinkGDBServer -device STM32H743XI -if SWD -port 3333 -nosilent -nolocalhostonly > /tmp/jlink.log 2>&1 &"
             ],
             "group": "build",
             "presentation": {
@@ -72,15 +74,19 @@
                 "panel": "shared"
             },
             "problemMatcher": [],
-            "detail": "在宿主机上启动JLinkGDBServer进行远程调试，先清理已存在的进程"
+            "detail": "在宿主机后台启动JLinkGDBServer",
+            "dependsOn": [
+                "Clean Project",
+                "CMake Build"
+            ]
         },
         {
             "label": "Stop JLinkGDBServer on Host",
             "type": "shell",
-            "command": "bash",
+            "command": "ssh",
             "args": [
-                "-c",
-                "ssh $USER@host.docker.internal 'pkill -f JLinkGDBServer'"
+                "host.docker.internal",
+                "pkill -f JLinkGDBServer"
             ],
             "group": "build",
             "presentation": {
