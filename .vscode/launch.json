@@ -14,7 +14,7 @@
             "gdbPath": "gdb-multiarch",
             "objdumpPath": "arm-none-eabi-objdump",
             "preLaunchTask": "CMake Build",
-            "postDebugTask": "Clean Project",
+            // "postDebugTask": "Clean Project",
             "showDevDebugOutput": "none"
         },
         {
