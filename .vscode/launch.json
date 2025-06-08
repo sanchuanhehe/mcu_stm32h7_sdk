@@ -18,7 +18,7 @@
             "showDevDebugOutput": "none"
         },
         {
-            "name": "Cortex Debug Remote (Host JLinkGDBServer)",
+            "name": "Cortex Debug Remote (linux) (Host JLinkGDBServer)",
             "cwd": "${workspaceFolder}",
             "executable": "./build/Debug/H7cpu.elf",
             "request": "launch",
@@ -30,6 +30,21 @@
             "objdumpPath": "arm-none-eabi-objdump",
             "preLaunchTask": "Start JLinkGDBServer on Host",
             "postDebugTask": "Stop JLinkGDBServer on Host",
+            "showDevDebugOutput": "none"
+        },
+        {
+            // 需手动在windows上启用JLinkGDBServer,命令 JLinkGDBServer -device STM32H743XI -if SWD -port 3333 -nosilent -nolocalhostonly
+            "name": "Cortex Debug Remote (wsl) (Host JLinkGDBServer)",
+            "cwd": "${workspaceFolder}",
+            "executable": "./build/Debug/H7cpu.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "runToEntryPoint": "main",
+            "servertype": "external",
+            "gdbTarget": "localhost:3333",
+            "gdbPath": "gdb-multiarch",
+            "objdumpPath": "arm-none-eabi-objdump",
+            "preLaunchTask": "CMake Build",
             "showDevDebugOutput": "none"
         }
     ]
